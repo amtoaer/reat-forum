@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <!-- MDUI CSS -->
+    <link rel="stylesheet" href="./css/mdui.min.css" />
+    <title>demo</title>
+</head>
+
+<body class="mdui-appbar-with-toolbar mdui-drawer-body-left">
+    <header class="mdui-theme-primary-indigo mdui-theme-accent-pink">
+        <div class="mdui-appbar mdui-appbar-fixed">
+            <div class="mdui-toolbar mdui-color-theme">
+                <a href="#" class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '.mdui-drawer'}"><i class="mdui-icon material-icons">menu</i></a>
+                <span class="mdui-typo-title">demo</span>
+                <div class="mdui-toolbar-spacer"></div>
+                <img src="./images/avatar.png" class="mdui-img-fluid mdui-img-circle" mdui-tooltip="{content:'未登录'}">
+                <a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-menu="{target: '#dropbar'}"><i class="mdui-icon material-icons">more_vert</i></a>
+                <ul class="mdui-menu mdui-menu-cascade" id="dropbar">
+                    <li class="mdui-menu-item" disabled>
+                        <a href="javascript:;">未登录</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="mdui-drawer">
+            <div class="mdui-list">
+                <a href="./index.html" class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue">home</i>
+                    <div class="mdui-list-item-content">欢迎</div>
+                </a>
+                <a href="./login.html" class="mdui-list-item mdui-list-item-active mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-teal-500">account_box</i>
+                    <div class="mdui-list-item-content">登录</div>
+                </a>
+                <a href="./register.html" class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-orange-500">assignment_ind</i>
+                    <div class="mdui-list-item-content">注册</div>
+                </a>
+                <a href="./about.html" class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-red-a100">description</i>
+                    <div class="mdui-list-item-content">关于</div>
+                </a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="mdui-container">
+            <div class="mdui-row">
+                <div class="mdui-col-offset-xs-3 mdui-col-xs-6">
+                    <div class="mdui-container">
+                        <div class="mdui-row">
+                            <div class="mdui-typo mdui-text-center">
+                                <h4>用户登录</h4>
+                            </div>
+                        </div>
+                        <div class="mdui-row">
+                            <div class="mdui-textfield mdui-textfield-floating-label">
+                                <label class="mdui-textfield-label">帐号</label>
+                                <input class="mdui-textfield-input mdui-textfield-invalid" id="account" type="text" />
+                                <div class="mdui-textfield-error">帐号长度必须大于6个字符</div>
+                            </div>
+                        </div>
+                        <div class="mdui-row">
+                            <div class="mdui-textfield mdui-textfield-floating-label mdui-textfield-has-bottom">
+                                <label class="mdui-textfield-label">密码</label>
+                                <input class="mdui-textfield-input" id="password" type="password" />
+                                <div class="mdui-textfield-error">密码长度必须大于6个字符</div>
+                            </div>
+                        </div>
+                        <div class="mdui-row">
+                            <input id="submit" type="submit" value="登录" class="mdui-btn mdui-btn-block mdui-color-indigo-accent">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <!-- MDUI JavaScript -->
+        <script src="./js/mdui.min.js"></script>
+        <script>
+            let $ = mdui.$
+
+            function checkAccount(obj) {
+                let father = obj.parent()
+                let account = String(obj.val())
+                if (account.length <= 6) {
+                    father.addClass('mdui-textfield-invalid')
+                    return false
+                }
+                father.removeClass('mdui-textfield-invalid')
+                return true
+            }
+
+            function checkPassword(obj) {
+                let father = obj.parent()
+                let password = String(obj.val())
+                if (password.length <= 6) {
+                    father.addClass('mdui-textfield-invalid')
+                    return false
+                }
+                father.removeClass('mdui-textfield-invalid')
+                return true
+            }
+
+            $('#account').on('change', function(e) {
+                checkAccount($(this))
+            })
+
+            $('#password').on('change', function(e) {
+                checkPassword($(this))
+            })
+
+            $('#submit').on('click', function(e) {
+                // 使用&，防止短路
+                if (checkAccount($('#account')) & checkPassword($('#password'))) {
+                    alert("通过检测")
+                } else {
+                    alert("未通过检测，请查看错误信息")
+                }
+            })
+        </script>
+    </footer>
+</body>
+
+</html>
