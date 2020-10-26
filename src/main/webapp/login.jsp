@@ -32,24 +32,26 @@
                             <h4>用户登录</h4>
                         </div>
                     </div>
-                    <div class="mdui-row">
-                        <div class="mdui-textfield mdui-textfield-floating-label">
-                            <label class="mdui-textfield-label">帐号</label>
-                            <input class="mdui-textfield-input mdui-textfield-invalid" id="account" type="text"/>
-                            <div class="mdui-textfield-error">帐号长度必须大于6个字符</div>
+                    <form action="<%=request.getContextPath()%>/loginservlet" method="post">
+                        <div class="mdui-row">
+                            <div class="mdui-textfield mdui-textfield-floating-label">
+                                <label class="mdui-textfield-label">帐号</label>
+                                <input class="mdui-textfield-input mdui-textfield-invalid" id="account" name="account" type="text"/>
+                                <div class="mdui-textfield-error">帐号长度必须大于6个字符</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="mdui-row">
-                        <div class="mdui-textfield mdui-textfield-floating-label mdui-textfield-has-bottom">
-                            <label class="mdui-textfield-label">密码</label>
-                            <input class="mdui-textfield-input" id="password" type="password"/>
-                            <div class="mdui-textfield-error">密码长度必须大于6个字符</div>
+                        <div class="mdui-row">
+                            <div class="mdui-textfield mdui-textfield-floating-label mdui-textfield-has-bottom">
+                                <label class="mdui-textfield-label">密码</label>
+                                <input class="mdui-textfield-input" id="password" name="password" type="password"/>
+                                <div class="mdui-textfield-error">密码长度必须大于6个字符</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="mdui-row">
-                        <input id="submit" type="submit" value="登录"
-                               class="mdui-btn mdui-btn-block mdui-color-indigo-accent">
-                    </div>
+                        <div class="mdui-row">
+                            <input id="submit" type="submit" value="登录" onclick="return check()"
+                                   class="mdui-btn mdui-btn-block mdui-color-indigo-accent">
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -83,21 +85,19 @@
             return true
         }
 
+        function check() {
+            // 直接进行&&会短路，因此分开写
+            let ac = checkAccount($('#account'))
+            let pa = checkPassword($('#password'))
+            return ac && pa
+        }
+
         $('#account').on('change', function (e) {
             checkAccount($(this))
         })
 
         $('#password').on('change', function (e) {
             checkPassword($(this))
-        })
-
-        $('#submit').on('click', function (e) {
-            // 使用&，防止短路
-            if (checkAccount($('#account')) & checkPassword($('#password'))) {
-                alert("通过检测")
-            } else {
-                alert("未通过检测，请查看错误信息")
-            }
         })
     </script>
 </footer>
