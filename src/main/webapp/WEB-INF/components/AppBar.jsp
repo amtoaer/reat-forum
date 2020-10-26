@@ -19,7 +19,7 @@
                 class="mdui-icon material-icons">menu</i></a>
         <span class="mdui-typo-title">demo</span>
         <div class="mdui-toolbar-spacer"></div>
-        <img src="<%=userImg%>" class="mdui-img-fluid mdui-img-circle" mdui-tooltip="{content:'<%=userName%>'}">
+        <img src="<%=userImg%>" class="mdui-chip-icon" mdui-tooltip="{content:'<%=userName%>'}">
         <a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-menu="{target: '#dropbar'}"><i
                 class="mdui-icon material-icons">more_vert</i></a>
         <ul class="mdui-menu mdui-menu-cascade" id="dropbar">
