@@ -1,6 +1,6 @@
 package org.reat.forum.servlets;
 
-import org.reat.forum.database.db;
+import org.reat.forum.database.DB;
 import org.reat.forum.struct.User;
 
 import javax.servlet.annotation.WebServlet;
@@ -10,18 +10,20 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(urlPatterns = "/loginservlet")
-public class login extends HttpServlet {
+public class Login extends HttpServlet {
   private static final long serialVersionUID = 1;
 
   @Override
-  public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     String account = req.getParameter("account");
     String password = req.getParameter("password");
     User tmp;
     // 登陆成功
-    if ((tmp = db.login(account, password)) != null) {
+    if ((tmp = DB.login(account, password)) != null) {
       req.getSession().setAttribute("user", tmp);
+    } else {
+      // 此处应重定向到登陆失败界面
     }
-    resp.sendRedirect(req.getContextPath() + "/index.jsp");
+    resp.sendRedirect(req.getContextPath() + "/forum?page=1");
   }
 }

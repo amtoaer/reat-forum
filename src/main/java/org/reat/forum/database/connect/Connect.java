@@ -3,7 +3,7 @@ package org.reat.forum.database.connect;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class connect {
+public class Connect {
   // 暂且先这样写，将来应该需要支持从文件读取
   private static String url = "jdbc:mysql://localhost:3306/reatforum";
   private static String user = "root";
