@@ -60,41 +60,43 @@
                                 <h4>用户注册</h4>
                             </div>
                         </div>
-                        <div class="mdui-row">
-                            <div class="mdui-textfield">
-                                <label class="mdui-textfield-label">用户名</label>
-                                <input class="mdui-textfield-input" name="name" id="name" type="text" />
-                                <div class="mdui-textfield-error">用户名不能为空</div>
-                                <div class="mdui-textfield-helper">用于论坛内显示的用户名</div>
+                        <form action="." method="post">
+                            <div class="mdui-row">
+                                <div class="mdui-textfield">
+                                    <label class="mdui-textfield-label">用户名</label>
+                                    <input class="mdui-textfield-input" name="name" id="name" type="text" />
+                                    <div class="mdui-textfield-error">用户名不能为空</div>
+                                    <div class="mdui-textfield-helper">用于论坛内显示的用户名</div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="mdui-row">
-                            <div class="mdui-textfield">
-                                <label class="mdui-textfield-label">帐号</label>
-                                <input class="mdui-textfield-input" name="account" id="account" type="text" />
-                                <div class="mdui-textfield-error">帐号长度必须大于6个字符</div>
-                                <div class="mdui-textfield-helper">用于登陆的帐号</div>
+                            <div class="mdui-row">
+                                <div class="mdui-textfield">
+                                    <label class="mdui-textfield-label">帐号</label>
+                                    <input class="mdui-textfield-input" name="account" id="account" type="text" />
+                                    <div class="mdui-textfield-error">帐号长度必须大于6个字符</div>
+                                    <div class="mdui-textfield-helper">用于登陆的帐号</div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="mdui-row">
-                            <div class="mdui-textfield">
-                                <label class="mdui-textfield-label">密码</label>
-                                <input class="mdui-textfield-input" name="password" id="password" type="password" />
-                                <div class="mdui-textfield-error">密码长度必须大于6个字符</div>
-                                <div class="mdui-textfield-helper">登陆密码</div>
+                            <div class="mdui-row">
+                                <div class="mdui-textfield">
+                                    <label class="mdui-textfield-label">密码</label>
+                                    <input class="mdui-textfield-input" name="password" id="password" type="password" />
+                                    <div class="mdui-textfield-error">密码长度必须大于6个字符</div>
+                                    <div class="mdui-textfield-helper">登陆密码</div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="mdui-row">
-                            <div class="mdui-textfield mdui-textfield-has-bottom">
-                                <label class="mdui-textfield-label">密码</label>
-                                <input class="mdui-textfield-input" name="repeatPassword" id="repeatPassword" type="password" />
-                                <div class="mdui-textfield-error">密码与上次输入不一致</div>
-                                <div class="mdui-textfield-helper">再次输入密码</div>
+                            <div class="mdui-row">
+                                <div class="mdui-textfield mdui-textfield-has-bottom">
+                                    <label class="mdui-textfield-label">密码</label>
+                                    <input class="mdui-textfield-input" name="repeatPassword" id="repeatPassword" type="password" />
+                                    <div class="mdui-textfield-error">密码与上次输入不一致</div>
+                                    <div class="mdui-textfield-helper">再次输入密码</div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="mdui-row">
-                            <input id="submit" type="submit" value="注册" class="mdui-btn mdui-btn-block mdui-color-indigo-accent">
-                        </div>
+                            <div class="mdui-row">
+                                <input id="submit" type="submit" value="注册" onclick="return check()" class="mdui-btn mdui-btn-block mdui-color-indigo-accent">
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -158,28 +160,29 @@
                 return true
             }
 
+            function check() {
+                let na = checkName($('#name'))
+                let ac = checkAccount($('#account'))
+                let fi = checkFirstPassword($('#password'))
+                let se = checkSecondPassword($('#repeatPassword'))
+                if (na && ac && fi && se) {
+                    alert("通过检测")
+                } else {
+                    alert("未通过检测")
+                }
+                return na && ac && fi && se
+            }
             $('#name').on('change', function(e) {
                 checkName($(this))
             })
-
             $('#account').on('change', function(e) {
                 checkAccount($(this))
             })
-
             $('#password').on('change', function(e) {
                 checkFirstPassword($(this))
             })
-
             $('#repeatPassword').on('change', function(e) {
                 checkSecondPassword($(this))
-            })
-
-            $('#submit').on('click', function(e) {
-                if (checkName($('#name')) & checkAccount($('#account')) & checkFirstPassword($('#password')) & checkSecondPassword($('#repeatPassword'))) {
-                    alert("通过检测")
-                } else {
-                    alert("未通过检测，请查看错误信息")
-                }
             })
         </script>
     </footer>
